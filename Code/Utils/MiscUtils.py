@@ -1,5 +1,7 @@
 import cv2
 import os
+import yaml
+import numpy as np
 
 def loadImages(folder_name):
     files = os.listdir(folder_name)
@@ -17,5 +19,14 @@ def loadImages(folder_name):
 
     return images
 
-def getCamParam(yaml_file):
-    pass
+def getCamera(config_file_name):
+    config_file = open(config_file_name)
+    config_data = yaml.load(config_file, Loader=yaml.FullLoader)
+
+    K = config_data.get('K')
+    D = config_data.get('D')
+
+    K = np.array(K.split(), np.float32).reshape(3,3)
+    D = np.array(D.split(), np.float32)
+
+    return K, D

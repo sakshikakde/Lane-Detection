@@ -21,17 +21,20 @@ def filterLines(linesP, old_r_line, old_l_line):
 
             if np.abs(angle) > 20 and np.abs(angle) < 70: #filter out horizontal and vertical lines
                 if angle < 0:
-                    left_lines.append(l)
-                    left_line_angles.append(angle)
+                    if angle > -35 and angle < -25:
+                        left_lines.append(l)
+                        left_line_angles.append(angle)
                 else:
-                    right_lines.append(l)
-                    right_line_angles.append(angle)
+                    if angle > 45 and angle < 65:
+                        right_lines.append(l)
+                        right_line_angles.append(angle)
 
         chosen_l_line = old_l_line
 
     if len(left_lines) is not 0:
         left_lines = np.array(left_lines).reshape(-1,4)
         chosen_l_index = np.argmax(left_lines[:,1])
+        # print("left angle = ", left_line_angles[chosen_l_index])
         chosen_l_line = left_lines[chosen_l_index, :]
     else:
         chosen_l_line = old_l_line
@@ -39,6 +42,7 @@ def filterLines(linesP, old_r_line, old_l_line):
     if len(right_lines) is not 0:
         right_lines = np.array(right_lines).reshape(-1,4)
         chosen_r_index = np.argmax(right_lines[:,1])
+        # print("right angle = ", right_line_angles[chosen_r_index])
         chosen_r_line = right_lines[chosen_r_index, :]
 
     else:
