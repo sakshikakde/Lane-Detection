@@ -58,7 +58,7 @@ def extendLines(line, y_min, y_max):
     x2 = line[2]
     y2 = line[3]
 
-    m = (y2 - y1) / (x2 - x1)
+    m = (y2 - y1) / (x2 - x1 + 1e-10)
     c = y2 - (m * x2)
     
     x_min = (y_max - c) / m 

@@ -11,6 +11,7 @@ from Utils.MiscUtils import *
 from Utils.GeometryUtils import *
 from Utils.MovingAverage import *
 import random
+import argparse
   
 
 def getWarpedLane(image):
@@ -167,14 +168,25 @@ def finalDisplay(image_undistorted, image_bin, image_warped, display_image, imag
     return full_pannel, turn
 
 def main():
-    BasePath = '/home/sakshi/courses/ENPM673/sakshi_p2/Data/Project2_Dataset2/data_2/'
-    video_file = BasePath + "challenge_video.mp4"
-    config_file_name = "/home/sakshi/courses/ENPM673/sakshi_p2/Data/Project2_Dataset2/data_2/cam_params.yaml"
 
-    cap = cv2.VideoCapture(video_file)
-    K, D = getCamera(config_file_name)
-    k = 450
-    i = 0 
+    Parser = argparse.ArgumentParser()
+    Parser.add_argument('--BasePath', default='/home/sakshi/courses/ENPM673/sakshi_p2/', help='Base path of project2')
+    Parser.add_argument('--VideoFilePath', default='Data/Project2_Dataset2/data_2/challenge_video.mp4', help='relative image files path')
+    Parser.add_argument('--CamConfigFile', default='Data/Project2_Dataset2/data_2/cam_params.yaml', help='.yaml config file name')
+    Parser.add_argument('--SaveFileName', default='Results/lane_detection/lane_result_2.avi', help='Saved video file name')
+
+    Args = Parser.parse_args()
+    BasePath = Args.BasePath
+    VideoFilePath = BasePath + Args.VideoFilePath
+    CamConfigFile = BasePath + Args.CamConfigFile
+    SaveFileName = BasePath + Args.SaveFileName    
+
+    cap = cv2.VideoCapture(VideoFilePath)
+    K, D = getCamera(CamConfigFile)
+
+    frame_width = int(cap.get(3)) + 600
+    frame_height = int(cap.get(4)) + 180
+    result = cv2.VideoWriter(SaveFileName, cv2.VideoWriter_fourcc(*'MJPG'), 10, (frame_width, frame_height)) 
 
     old_left_fit = []
     old_right_fit = []
@@ -286,13 +298,13 @@ def main():
 
 
         cv2.imshow('frame', full_display)
+        result.write(full_display)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
     cv2.destroyAllWindows()
 
-# %%
 if __name__ == "__main__":
     main()
 
