@@ -257,12 +257,17 @@ def main():
         draw_points_left = draw_points_left.reshape(-1,1,2).astype(np.float32)
         draw_points_left_transformed = cv2.perspectiveTransform(draw_points_left, np.linalg.inv(H))
         draw_points_left_transformed= (draw_points_left_transformed.reshape(-1,2)).astype(np.int32)
-        image_overlay = cv2.polylines(image_overlay, [draw_points_left_transformed], False, (0,255,0), 4)  
+        image_overlay = cv2.polylines(image_overlay, [draw_points_left_transformed], False, (0,0,255), 4)  
 
         draw_points_right = draw_points_right.reshape(-1,1,2).astype(np.float32)
         draw_points_right_transformed = cv2.perspectiveTransform(draw_points_right, np.linalg.inv(H))
         draw_points_right_transformed= (draw_points_right_transformed.reshape(-1,2)).astype(np.int32)
-        image_overlay = cv2.polylines(image_overlay, [draw_points_right_transformed], False, (0,255,0), 4)  
+        image_overlay = cv2.polylines(image_overlay, [draw_points_right_transformed], False, (0, 255, 255), 4)  
+
+        corners = np.vstack((draw_points_left_transformed, draw_points_right_transformed[::-1]))
+        cv2.fillPoly(image_overlay, pts =[corners], color=(0,0,255))
+        #overlay
+        cv2.addWeighted(image_overlay, 0.4, image_undistorted, 0.6, 0, image_overlay)
         
         #curvature
         h_w = image_warped.shape[0]
@@ -286,7 +291,6 @@ def main():
 
     cap.release()
     cv2.destroyAllWindows()
-
 
 # %%
 if __name__ == "__main__":
