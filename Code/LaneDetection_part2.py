@@ -171,14 +171,14 @@ def main():
 
     Parser = argparse.ArgumentParser()
     Parser.add_argument('--BasePath', default='/home/sakshi/courses/ENPM673/sakshi_p2/', help='Base path of project2')
-    Parser.add_argument('--VideoFilePath', default='Data/Project2_Dataset2/data_2/challenge_video.mp4', help='relative image files path')
-    Parser.add_argument('--CamConfigFile', default='Data/Project2_Dataset2/data_2/cam_params.yaml', help='.yaml config file name')
+    Parser.add_argument('--VideoFilePath', default='/home/sakshi/courses/ENPM673/sakshi_p2/Data/Project2_Dataset2/data_2/challenge_video.mp4', help='relative image files path')
+    Parser.add_argument('--CamConfigFile', default='/home/sakshi/courses/ENPM673/sakshi_p2/Data/Project2_Dataset2/data_2/cam_params.yaml', help='.yaml config file name')
     Parser.add_argument('--SaveFileName', default='Results/lane_detection/lane_result_2.avi', help='Saved video file name')
 
     Args = Parser.parse_args()
     BasePath = Args.BasePath
-    VideoFilePath = BasePath + Args.VideoFilePath
-    CamConfigFile = BasePath + Args.CamConfigFile
+    VideoFilePath = Args.VideoFilePath
+    CamConfigFile = Args.CamConfigFile
     SaveFileName = BasePath + Args.SaveFileName    
 
     cap = cv2.VideoCapture(VideoFilePath)

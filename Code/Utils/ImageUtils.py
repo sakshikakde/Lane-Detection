@@ -99,6 +99,15 @@ def drawCurve(image, coef, color):
     display_image = cv2.polylines(image, [draw_points], False, color, 4)  
     return display_image, draw_points
 
+# def drawCurve(image, coef, color):
+#     h_w, w_w = image.shape[:2]
+#     x = np.linspace(0, h_w - 1, h_w)
+#     y = (coef[0] * x**3 + coef[1] * x**2 + coef[2]*x + coef[3])
+    
+#     draw_points= (np.asarray([y, x]).T).astype(np.int32)
+#     display_image = cv2.polylines(image, [draw_points], False, color, 4)  
+#     return display_image, draw_points
+
 
 def drawDetections(image_warped, left_indexes, right_indexes):
     #for display
