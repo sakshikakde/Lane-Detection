@@ -12,8 +12,16 @@ Note: Check the spaces in the video file name
 2) VideoFilePath - absolute path of the video file
 3) SaveFileName - Path to the folder along with name where results are saved. Note: This path is relative to BasePath
 
-# Problem 2
-### Note: There were parsing issues in .yml file for the data2. I have made the changes. So please use the updated yml file only.
+# Problem 2: Lane Detection 
+## Image Prepossessing
+The following operations were performed before lane de-
+tection:
+1) Image undistortion using cv2.undistort.
+2) Image blurring using a Gaussian kernel of size 5 ×5.
+3) Thresholding the gray image to get a binary image.
+4) Obtained ROI, which is almost 55% of the image.
+![Preprocessing output](https://github.com/sakshikakde/Lane-Detection/blob/main/images/i_bin.png)
+
 ## How to run the code - Approach 1
 Change the directory where the .py files are present    
 /home/sakshi/courses/ENPM673/sakshi_p2/Code
