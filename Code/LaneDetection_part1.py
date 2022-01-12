@@ -1,4 +1,5 @@
-
+import gi
+gi.require_version('Gtk', '2.0')
 import numpy as np
 import cv2
 import scipy
@@ -15,9 +16,9 @@ import argparse
 def main():
 
     Parser = argparse.ArgumentParser()
-    Parser.add_argument('--BasePath', default='/home/sakshi/courses/ENPM673/sakshi_p2/', help='Base path of project2')
-    Parser.add_argument('--ImageFilePath', default='/home/sakshi/courses/ENPM673/sakshi_p2/Data/Project2_Dataset2/data_1/data', help='absolute path')
-    Parser.add_argument('--CamConfigFile', default='/home/sakshi/courses/ENPM673/sakshi_p2/Data/Project2_Dataset2/data_1/camera_params.yaml', help='.yaml config file name')
+    Parser.add_argument('--BasePath', default='./', help='Base path of project2')
+    Parser.add_argument('--ImageFilePath', default='./Data/Project2_Dataset2/data_1/data', help='absolute path')
+    Parser.add_argument('--CamConfigFile', default='./Data/Project2_Dataset2/data_1/camera_params.yaml', help='.yaml config file name')
     Parser.add_argument('--SaveFileName', default='Results/Problem2/lane_result_1.avi', help='Saved video file name')
 
     Args = Parser.parse_args()
@@ -26,8 +27,6 @@ def main():
     CamConfigFile = Args.CamConfigFile
     SaveFileName = BasePath + Args.SaveFileName    
 
-    # folder_name = "/home/sakshi/courses/ENPM673/sakshi_p2/Data/Project2_Dataset2/data_1/data"
-    # config_file_name = "/home/sakshi/courses/ENPM673/sakshi_p2/Data/Project2_Dataset2/data_1/camera_params.yaml"
     images = loadImages(ImageFilePath)
     K, D = getCamera(CamConfigFile)
 

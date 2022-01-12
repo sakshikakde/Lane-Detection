@@ -1,6 +1,5 @@
-# To add a new cell, type '# %%'
-# To add a new markdown cell, type '# %% [markdown]'
-# %%
+import gi
+gi.require_version('Gtk', '2.0')
 import numpy as np
 import cv2
 import scipy
@@ -8,7 +7,6 @@ import matplotlib.pyplot as plt
 import math
 import argparse
 
-# %%
 def adjustGamma(image, gamma=1.0):
 	# build a lookup table mapping the pixel values [0, 255] to
 	# their adjusted gamma values
@@ -19,7 +17,6 @@ def adjustGamma(image, gamma=1.0):
 	return cv2.LUT(image, table)
 
 
-# %%
 def AdaptivehistogramEqualizer(image):
     # gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
@@ -34,7 +31,7 @@ def AdaptivehistogramEqualizer(image):
     return equalized_image
 
 
-# %%
+
 def histogramEqualizer(image):
     # gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image_lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
@@ -55,21 +52,17 @@ def histogramEqualizer(image):
     return equalized_image
 
 
-# %%
 def main():  
 
     Parser = argparse.ArgumentParser()
-    Parser.add_argument('--BasePath', default='/home/sakshi/courses/ENPM673/sakshi_p2/', help='Base path of project1, Default:/home/sakshi/courses/ENPM673/sakshi_p1/')
-    Parser.add_argument('--VideoFilePath', default='/home/sakshi/courses/ENPM673/sakshi_p2/Data/Night Drive - 2689.mp4', help='MP4 file name, Default:Tag2.mp4')
+    Parser.add_argument('--BasePath', default='./', help='Base path of project1, Default:./')
+    Parser.add_argument('--VideoFilePath', default='./Data/Night Drive - 2689.mp4', help='MP4 file name, Default:Tag2.mp4')
     Parser.add_argument('--SaveFileName', default='Results/Problem1/ImageCorrection.avi', help='Folder to save graphs, Default:Video1')
 
     Args = Parser.parse_args()
     BasePath = Args.BasePath
     VideoFilePath = Args.VideoFilePath
     SaveFileName = BasePath + Args.SaveFileName
-    # BasePath = '/home/sakshi/courses/ENPM673/sakshi_p2/'
-    # # SavePath = BasePath + "Results/problem1/"
-    # video_file = BasePath + "Data/Night Drive - 2689.mp4"
 
     cap = cv2.VideoCapture(VideoFilePath)
     frame_width = int(cap.get(3)) 
@@ -94,8 +87,6 @@ def main():
     cap.release()
     cv2.destroyAllWindows()
 
-
-# %%
 if __name__ == "__main__":
     main()
 
