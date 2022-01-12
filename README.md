@@ -25,7 +25,7 @@ python3 Code/ImageCorrection.py  --BasePath ./ --VideoFilePath ./Data/Night\ Dri
 - SaveFileName - Path to the folder along with name where results are saved. Note: This path is relative to BasePath
 
 ## Result
-
+![alt](https://github.com/sakshikakde/Lane-Detection/blob/main/Results/ImageCorrection.gif)
 
 # Problem 2: Lane Detection 
 ## Image Prepossessing
