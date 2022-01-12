@@ -35,7 +35,7 @@ tection:
 2) Image blurring using a Gaussian kernel of size 5 ×5.
 3) Thresholding the gray image to get a binary image.
 4) Obtained ROI, which is almost 55% of the image.
-![Preprocessing output](https://github.com/sakshikakde/Lane-Detection/blob/main/images/i_bin.png)
+
 
 ## How to run the code - Approach 1
 - Change the directory to the root folder.
