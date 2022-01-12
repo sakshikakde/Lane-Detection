@@ -57,7 +57,7 @@ def main():
     Parser = argparse.ArgumentParser()
     Parser.add_argument('--BasePath', default='./', help='Base path of project1, Default:./')
     Parser.add_argument('--VideoFilePath', default='./Data/Night Drive - 2689.mp4', help='MP4 file name, Default:Tag2.mp4')
-    Parser.add_argument('--SaveFileName', default='Results/Problem1/ImageCorrection.avi', help='Folder to save graphs, Default:Video1')
+    Parser.add_argument('--SaveFileName', default='Results/ImageCorrection.avi', help='Folder to save graphs, Default:Video1')
 
     Args = Parser.parse_args()
     BasePath = Args.BasePath
